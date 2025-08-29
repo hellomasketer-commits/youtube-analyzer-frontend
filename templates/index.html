@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Channel Analyzer AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Styling untuk konten yang dihasilkan oleh marked.js */
+        .prose h2 { @apply text-2xl font-bold mb-4 mt-6 text-slate-800; }
+        .prose h3 { @apply text-xl font-semibold mb-3 mt-5 text-slate-700; }
+        .prose p { @apply mb-4 text-slate-600; }
+        .prose ul { @apply list-disc list-inside mb-4 pl-4 text-slate-600; }
+        .prose ol { @apply list-decimal list-inside mb-4 pl-4 text-slate-600; }
+        .prose li { @apply mb-2; }
+        .prose a { @apply text-blue-600 hover:underline; }
+        .prose strong { @apply font-bold text-slate-700; }
+        .prose hr { @apply my-6; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+    
+    <div class="container mx-auto max-w-4xl p-4 md:p-8">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">YouTube Analyzer AI 🚀</h1>
+            <p class="mt-3 text-lg text-slate-600">Analisis Channel Anda Menggunakan Kekuatan Gemini AI</p>
+        </div>
+
+        <div class="relative flex shadow-lg rounded-xl mb-4">
+            <input type="text" id="channelIdInput" class="w-full p-4 text-lg border-2 border-transparent rounded-l-xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="Masukkan ID Channel YouTube...">
+            <button id="fetchBtn" class="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-r-xl hover:bg-blue-700 transition-colors duration-300">Dapatkan Data</button>
+        </div>
+
+        <div id="mainLoader" class="text-center my-8" style="display: none;">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 mx-auto"></div>
+        </div>
+
+        <div id="resultsPanel" class="space-y-6 d-none">
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 id="channelName" class="text-2xl font-bold text-slate-800">Nama Channel</h3>
+                <p id="subscriberCount" class="text-lg text-slate-500">Jumlah Subscriber</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-bold mb-4">Panel Kontrol Analisis</h3>
+                <p class="text-slate-600 mb-4">Pilih analisis yang ingin Anda lihat:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button class="w-full text-left p-4 bg-slate-50 hover:bg-slate-200 border border-slate-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" id="analyzeGeneralBtn">
+                        <span class="font-bold text-slate-700">Analisis Umum & Judul</span>
+                        <span class="text-sm text-slate-500 block">Dapatkan ringkasan, analisis judul lama, dan strategi.</span>
+                    </button>
+                    <button class="w-full text-left p-4 bg-slate-50 hover:bg-slate-200 border border-slate-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" id="analyzeThumbnailsBtn">
+                        <span class="font-bold text-slate-700">Analisis Thumbnail</span>
+                        <span class="text-sm text-slate-500 block">Dapatkan skor dan saran perbaikan untuk 10 thumbnail terakhir.</span>
+                    </button>
+                    <button class="w-full text-left p-4 bg-slate-50 hover:bg-slate-200 border border-slate-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" id="analyzeCommentsBtn">
+                        <span class="font-bold text-slate-700">Analisis Komentar</span>
+                        <span class="text-sm text-slate-500 block">Lihat sentimen audiens dari komentar video terbaru.</span>
+                    </button>
+                    <button class="w-full text-left p-4 bg-green-100 hover:bg-green-200 border border-green-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" id="analyzeTitlesBtn">
+                        <span class="font-bold text-green-800">Dapatkan 10 Ide Judul Baru</span>
+                        <span class="text-sm text-green-600 block">Saran judul kreatif dan SEO-friendly untuk video selanjutnya.</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="general-result" class="analysis-result"></div>
+            <div id="thumbnail-result" class="analysis-result"></div>
+            <div id="comment-result" class="analysis-result"></div>
+            <div id="title-suggestion-result" class="analysis-result"></div>
+        </div>
+
+    </div> <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
